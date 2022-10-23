@@ -6,26 +6,41 @@ data.js
 
 ## 変数
 variable.js
-
-命名規則については
-naming-rule.mdを参照
+変数
+変数の命名規則
 
 ## 定数
+定数
 constant.js
 
 ## 条件分岐
-if文、switch文について
 if-switch.js
+if文
+switch文
 
 ## 繰り返し処理
-while文、for文について
 loop.js
+while文
+for文
 
 ## 配列
 array.js
+配列
 
 ## オブジェクト
 object.js
+オブジェクト
 
 ## 関数
 function.js
+関数
+引数
+戻り値
+スコープ
+
+## クラス
+class.js
+クラス
+インスタンス
+インスタンス化
+メソッド

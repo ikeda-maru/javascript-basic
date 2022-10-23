@@ -68,3 +68,15 @@ const double = (num) => {
 
 // 関数の戻り値を出力する
 console.log(double(30));
+
+// 関数の中で定数を宣言し、関数の中で定数を使う
+const useVariable = () => {
+  const userName = '太郎'
+  console.log(userName);
+}
+
+// 関数を呼び出す
+useVariable();
+
+// 関数の中で宣言した定数を関数の外で使う
+console.log(userName); // スコープ外なのでエラー

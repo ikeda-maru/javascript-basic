@@ -26,3 +26,6 @@ array.js
 
 ## オブジェクト
 object.js
+
+## 関数
+function.js

@@ -11,6 +11,28 @@
 
   <button id="add-btn">リストの追加</button>
   <ul id="parent-list"></ul>
+
+  <form name="textForm">
+    <input type="text" name="textBox" />
+  </form>
+  <button id="count-btn">文字数のカウント</button>
+
+  <form name="areaForm">
+    <input type="radio" name="area" value="tokyo" />東京都
+    <input type="radio" name="area" value="aichi" />愛知県
+    <input type="radio" name="area" value="osaka" />大阪府
+  </form>
+  <button id="area-btn">値の取得</button>
+
+  <form name="osForm">
+    <label>利用したことのあるOSを選択してください</label><br />
+    <input type="checkbox" name="os" value="windows" />Windows
+    <input type="checkbox" name="os" value="macos" />macOS
+    <input type="checkbox" name="os" value="linux" />Linux
+    <input type="checkbox" name="os" value="ios" />iOS
+    <input type="checkbox" name="os" value="android" />Android
+  </form>
+  <button id="os-btn">値の取得</button>
   
   <script src="js/event.js"></script>
 </body>

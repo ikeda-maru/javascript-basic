@@ -12,16 +12,6 @@ console.log('5' == 5); // true
 // 厳密等価演算子は2つの値とデータ型が等しい場合にtrueを返す
 console.log('5' === 5); // false
 
-/* if文の書き方
-if (条件式A) {
-  条件式Aが成り立つときの処理
-} else if (条件式B) {
-  条件式Bが成り立つときの処理
-} else {
-  どの条件も成り立たないときの処理
-}
-*/ 
-
 // 変数numに0~4までのランダムな整数を代入する
 let num = Math.floor(Math.random() * 5);
 
@@ -41,27 +31,10 @@ else {
   console.log('はずれです');
 }
 
-/* switch文の書き方
-switch (式) {
-  case 値1:
-    式が値1のときの処理
-    break;
-  case 値2:
-    式が値2のときの処理
-    break;
-  case 値3:
-    式が値3のときの処理
-    break;
-  default:
-    式がいずれのcaseにも当てはまらないときの処理
-    break;
-}
-*/
-
 // 変数numに0~4までのランダムな整数を代入する
 let num2 = Math.floor(Math.random() * 5);
 
-// 変数numの値と出力する（確認用）
+// 変数numの値を出力する（確認用）
 console.log(num2);
 
 // 変数numの値によって出力する文字列を切り替える

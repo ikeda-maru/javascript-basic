@@ -437,14 +437,48 @@ HTML要素を取得するための主なメソッドは以下の通り。
   `length`プロパティは`HTMLcollection`にも使用可能。
 
 `HTMLcollection`の長さをfor文の条件式にして、HTML要素の数だけ繰り返し処理を行う。
+```
+// 複数のHTML要素を取得し、定数に代入する
+const cssHeadings = document.querySelectorAll('.heading');
+const cssLists = document.querySelectorAll('li');
 
+// 複数のHTML要素を1つずつ取得し、中身を出力する
+for (let i = 0; i < cssHeadings.length; i++) {
+  console.log(cssHeadings[i]);
+}
+for (let i = 0; i < cssLists.length; i++) {
+  console.log(cssLists[i]);
+}
+```
 ### HTML要素を作成
+要素やテキストを作成するメソッドやプロパティ
+- `createElement()`メソッド: HTML要素を新しく作成
 
-dom.html
-dom.js
-DOM
-DOM操作
-ノード
+```
+// 新しくli要素を作成し、定数に代入
+const li = document.createElement('li');
+```
+
+- `textContent`/`innerHTML`プロパティ: HTML要素にテキストを追加
+`innerHTML`は文字列に加えてHTMLタグも記述可能
+
+```
+// 上記createElementで作成したli要素にテキストを追加
+//textContentの場合
+li.textContent = 'JavaScript'で新しく作成したリスト';
+
+// innerHTMLの場合
+li.innerHTML = '<a href="#">JavaScriptで新しく作成したリスト</a>
+```
+
+上記では定数に代入しただけなので、ブラウザには変化なし。
+ブラウザに表示させるには作成したHTML要素を`document`オブジェクトに追加する必要がある。
+
+- `appendChild()`メソッド: 作成したHTML要素を子要素として末尾に追加
+```
+// ul要素の末尾にli要素を追加する
+document.querySelector('ul').appendChild(li);
+```
 
 ## イベント
 event.html

@@ -515,10 +515,162 @@ HTML要素の部分には、`getElementById()`メソドナをで取得したHTML
 - focus: HTML要素にフォーカスしたとき
 - scroll: 画面をスクロールしたとき
 
-## イベント（スクロール）
+### フォームに入力された文字数をカウント
+
+1. テキストボックスに入力された文字列を取得
+
+テキストボックスの値を取得するには、まず`form`要素を取得する。
+`getElementById()`メソッドなどを使うこともできるが、フォームは`name`属性の値を使うことで容易に取得可能
+```
+// textFormというname属性を持つフォームを取得
+document.forms.textForm;
+```
+また、続けてテキストボックスの`name`属性の値を記述すれば、テキストボックス(`input`要素)も取得可能
+```
+// textBoxというname属性を持つテキストボックスを取得
+document.forms.textForm.textBox;
+```
+
+入力された値を取得するには、続けて`value`プロパティを記述。
+```
+// textboxというname属性を持つテキストボックスの値を取得
+document.forms.textForm.textbox.value;
+```
+
+2. 取得した文字列の文字数を出力
+
+取得した文字列の文字数を出力するには、`length`プロパティを使う。
+`length`プロパティは文字列や配列の長さを取得するプロパティ。
+
+### 選択されたラジオボタンの値を取得
+
+1. 選択されたラジオボタンの値を取得する
+
+上記のテキストボックスの取得方法と同様、ラジオボタンの値も取得可能。
+```
+document.forms.form要素のname属性の値.input要素のname属性の値.value;
+```
+
+2. 取得した値を出力する
+
+`console.log()`で出力可能だが、コードをスッキリさせるため、取得した値は一度変数や定数に代入しておく。
+```
+// 変数や定数に代入しない場合
+// 引数が長いので見づらい
+console.log(document.forms.form要素のname属性の値.input要素のname属性の値.value);
+
+// 変数や定数に代入しておく場合
+const 定数名 = document.forms.form要素のname属性の値.input要素のname属性の値.value;
+// 引数が短くスッキリ見やすい
+console.log(定数名);
+```
+
+### 選択されたチェックボックスの値を取得
+
+1. すべてのチェックボックスを配列風のデータで取得
+
+値ではなく、チェックボックスを形作るinput要素そのものを取得。
+```
+document.forms.form要素のname属性の値.input要素のname属性の値;
+```
+
+2. 繰り返し処理でチェックボックスを1つずつ取り出し、もし選択されていれば値を出力する
+
+ラジオボタンとの相違は「複数の項目を選択できる」ということ。
+選択されたすべての値を出力するために、for文とifbンを組み合わせて使用。
+
+  1. for文を使い、取得したチェックボックス(input要素)を1つずつ取り出す
+  2. for文の中でif文を使い、各チェックボックスがもし選択されていれば値を出力。
+
+チェックボックスは、ユーザーが選択(チェックを入れる)と`checked`プロパティが`true`になる仕組み。
+これをif文に利用し、`チェックボックス.checked`と記述すれば、チェックボックスが選択されていた場合にのみ処理を行うことが可能。
+
+for文の条件式には`length`プロパティを使い、チェックボックスの数だけ繰り返し処理を行う。
+
+### スクロール量に合わせてボタンの表示・非表示を切り替え
 scroll.html
 scroll.js
+
+- 処理を実行するのはスクロールしたとき。
+  `addEventListner()`メソッドの第1引数は`scroll`。
+- イベント処理の実行対象は特定のHTML要素ではなく、画面全体。
+  windowオブジェクトを指定。
+
+```
+window.addEventListener('scroll', () => {
+  イベント処理
+});
+```
+
+1. 画面のスクロール量を取得
+
+`document.scrollingElement.scrollTop`プロパティ: スクロール量をpx(ピクセス)数で取得できる。
+
+```
+// 画面のスクロール量をpx(ピクセル)数で取得
+const scrollValue = document.scrollingElement.scrollTop;
+```
+イベント処理はスクロールするたびに実行されるので、リアルタイムで画面のスクロール量を取得できる。
+
+2. スクロール量が`**px`以上であれば「TOPに戻る」ボタンを表示
+
+取得したスクロール量を利用し、if文で「スクロール量が`**px`以上であれば」という条件式を作る。
+
+```
+// 画面のスクロール量が300px以上であれば、処理を実行
+if (scrollValue >= 300) {
+  条件が成り立つときの処理
+}
+```
+
+「TOPに戻る」ボタンを表示するには、JavaScriptからCSSのスタイルを変更する必要がある。  
+JavaScriptからCSSのスタイルを変更するには、以下のように記述する。
+```
+HTML要素.style.CSSプロパティ = 変更後の値;
+```
+
+`display`プロパティの初期値を`none`にしておいて(非表示)、これを`inline`に変更することでボタンが表示されるようにする。
+
+```
+// back-btnというidを持つHTML要素を取得し、定数に代入する
+const backBtn = document.getElementById('back-btn');
+
+// 取得したHTML要素のdisplayプロパティの値をinlineに変更する
+backBtn.style.display = 'inline';
+```
+
+3. スクロール量が`**px`未満であれば「TOPに戻る」ボタンを非表示
+
+上記2.の処理だけだと、一度表示されたあと、表示されたままになる。
+今回の例では`300px`以上で表示されるようにしたので、`300px`未満になったときに非表示に切り替える処理を加える必要がある。
+
+これを加えて、今までの処理をまとめると下記のようになる。
+```
+// back-btnというidを持つHTML要素を取得し、定数に代入
+const backBtn = document.getElementById('back-btn');
+
+// 画面のスクロール量をpx(ピクセル)数で取得
+const scrollValue = document.scrollingElement.scrollTop;
+
+// 画面のスクロール量が300px以上であれば、「TOPに戻る」ボタンを表示する
+if (scrollValue >= 300) {
+  backBtn.style.display = 'inline';
+}
+// 画面のスクロール量がそれ以外(300px未満)であれば、「TOPに戻る」ボタンを非表示にする
+else {
+  backBtn.style.display = 'none';
+}
+```
 
 ## 非同期処理
 async.html
 async.js
+
+非同期処理は、「処理を実行している間、同時に他の処理も実行できる仕組み」のこと。
+
+- `setTimeout`関数: 設定した設定時間後に処理を実行する。
+```
+setTimeout(() => {
+  処理
+}, 待ち時間);
+```
